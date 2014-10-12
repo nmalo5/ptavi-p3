@@ -62,11 +62,3 @@ class SmallSMILHandler(ContentHandler):
 
     def get_tags(self):
         return self.lista
-#if __name__ == "__main__":
-
- #   parser = make_parser()
-   # cHandler = SmallSMILHandler()
-    #parser.setContentHandler(cHandler)
-    #parser.parse(open('karaoke.smil'))
-    #ejemplo = cHandler
-    #print ejemplo.get_tags()
