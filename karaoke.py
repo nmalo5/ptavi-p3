@@ -14,7 +14,6 @@ parser.parse(open('karaoke.smil'))
 ejemplo = cHandler
 lista = ejemplo.get_tags()
 posregion = 7  #guardamos la pos de la etiqueta region para diferenciar mas adelante
-#print lista[7]
 hayblancos = "" in lista
 while hayblancos:
     borrarelem = (lista.index("") - 1)
@@ -22,7 +21,6 @@ while hayblancos:
     del lista[borrarelem]
     hayblancos = "" in lista
 pos = []
-print lista #
 n = 0
 for e in lista:   #Buscamos la posición de las etiquetas
     if e == "root-layout" or e == "img" or e == "audio" or e =="textstream":
@@ -32,23 +30,36 @@ for e in lista:   #Buscamos la posición de las etiquetas
         if etq == "id" or etq == "top" or etq == "bottom" or etq == "left" or etq == "right":
             pos.append(n)
     n = n + 1
-print pos    #
 print len(lista)
 cadena = ""
 n = 0 #recorre la lista lista 
 imprimir = False
-elemento = False
-for elem in lista: 
+etiqueta = False
+for i in lista: 
     if n == len(lista)-1 and n != 0:
        imprimir = True
-    for num in pos :
+    for num in pos : 
         if (num-1) == n and n!= 0:
             imprimir = True
-    cadena = cadena + elem
+        elif num == n:     #para trata a region como atributo o etiqueta
+            etiqueta = True
+    if (i == "width" or i == "heigth" or i == "background-color" or i == "id"
+        or i == "top" or i == "bottom" or i == "left" or i == "right" 
+        or i == "src" or i == "begin" or i == "dur"):  #todos los atributos excepto region
+        cadena = cadena + "\t"
+        cadena = cadena + i 
+        cadena = cadena + "="
+    elif i == "region" and not etiqueta:
+        cadena = cadena + "\t"
+        cadena = cadena + i 
+        cadena = cadena + "="
+    else:
+        cadena = cadena + i
+        
     
     if imprimir:
         print cadena 
         cadena = ""
         imprimir = False   
-    
+    etiqueta = False
     n = n + 1
