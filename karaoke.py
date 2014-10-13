@@ -24,7 +24,7 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
             del self.lista[borrarelem]
             hayblancos = "" in self.lista
         self.pos = []
-        n = 0
+        n = 0  # para tener las posiciones en la lista
 
         for elem in self.lista:  # Buscamos la self.posición de las etiquetas
             if (elem == "root-layout" or elem == "img" or elem == "audio"
@@ -43,7 +43,7 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
         etiqueta = False
         rremoto = ""
         rlocal = []
-        for i in self.lista:
+        for i in self.lista:  # siendo i cada elemento de la lista
             if n == len(self.lista)-1 and n != 0:
                 imprimir = True
             for num in self.pos:
